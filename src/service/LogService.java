@@ -1,13 +1,19 @@
 package service;
 
+import model.LogEntry;
 import utils.LogParser;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class LogService{
+  //list for storage logs line
+  private List<LogEntry> logs = new ArrayList<>();
+
   private LogParser parser;
 
   public LogService(LogParser parser) {
@@ -18,7 +24,7 @@ public class LogService{
     Path caminho = Path.of(filePath);
 
     try (Stream<String> rows = Files.lines(caminho)){
-      rows.map(row -> {
+      this.logs = rows.map(row -> {
         try {
           return parser.parse(row);
         } catch (IllegalArgumentException e) {
@@ -27,7 +33,7 @@ public class LogService{
         }
       })
               .filter(log -> log != null)
-              .forEach(log -> System.out.println(log));
+              .toList();
 
     } catch (IOException e) {
       throw new RuntimeException(e);
