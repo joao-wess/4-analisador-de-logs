@@ -1,7 +1,7 @@
-package service;
+package com.joaovitor.log.service;
 
-import model.LogEntry;
-import utils.LogParser;
+import com.joaovitor.log.model.LogEntry;
+import com.joaovitor.log.utils.LogParser;
 
 import java.io.IOException;
 import java.nio.file.Files;

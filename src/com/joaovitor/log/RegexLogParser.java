@@ -1,6 +1,7 @@
-package utils;
+package com.joaovitor.log;
 
-import model.LogEntry;
+import com.joaovitor.log.utils.LogParser;
+import com.joaovitor.log.model.LogEntry;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

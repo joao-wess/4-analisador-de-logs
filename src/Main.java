@@ -1,10 +1,6 @@
-import model.LogEntry;
-import service.LogService;
-import utils.LogParser;
-import utils.RegexLogParser;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.joaovitor.log.RegexLogParser;
+import com.joaovitor.log.service.LogService;
+import com.joaovitor.log.utils.LogParser;
 
 public class Main {
   public static void main(String[] args) {

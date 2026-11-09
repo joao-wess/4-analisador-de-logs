@@ -1,4 +1,4 @@
-package model;
+package com.joaovitor.log.model;
 
 import java.time.LocalDateTime;
 
