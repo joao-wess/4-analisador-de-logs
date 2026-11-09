@@ -13,5 +13,10 @@ public class Main {
     LogService lService = new LogService(lParser);
 
     lService.processFile("logs/app.log");
+
+    //System.out.println(lService.searchByLevel("INFO"));
+
+    System.out.println(lService.searchByKeyword("servidor"));
+    System.out.println(lService.searchByKeyword("cpu"));
   }
 }
