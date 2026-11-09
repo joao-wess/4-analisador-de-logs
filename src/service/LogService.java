@@ -20,6 +20,7 @@ public class LogService{
     this.parser = parser;
   }
 
+  //process file and treatment error
   public void processFile(String filePath) {
     Path caminho = Path.of(filePath);
 
@@ -28,7 +29,6 @@ public class LogService{
         try {
           return parser.parse(row);
         } catch (IllegalArgumentException e) {
-          System.out.println("Linha inválida/corrompida " + e.getMessage());
           return null;
         }
       })
@@ -38,5 +38,19 @@ public class LogService{
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  //search by level
+  public List<LogEntry> searchByLevel(String level) {
+    return logs.stream()
+            .filter(log -> log.logLevel().equalsIgnoreCase(level))
+            .toList();
+  }
+
+  //search by keyword
+  public List<LogEntry> searchByKeyword(String message) {
+    return logs.stream()
+            .filter(log -> log.message().toLowerCase().contains(message.toLowerCase()))
+            .toList();
   }
 }
