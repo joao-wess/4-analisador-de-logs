@@ -1,5 +1,6 @@
 package com.joaovitor.log.service;
 
+import com.joaovitor.log.exception.ArquivoLogException;
 import com.joaovitor.log.model.LogEntry;
 import com.joaovitor.log.utils.LogParser;
 
@@ -36,7 +37,7 @@ public class LogService{
               .toList();
 
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new ArquivoLogException("O arquivo de log especificado não foi encontrado ou está vazio. " + e.getMessage());
     }
   }
 
