@@ -1,6 +1,5 @@
-package com.joaovitor.log;
+package com.joaovitor.log.utils;
 
-import com.joaovitor.log.utils.LogParser;
 import com.joaovitor.log.model.LogEntry;
 
 import java.time.LocalDateTime;
