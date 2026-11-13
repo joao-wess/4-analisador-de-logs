@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LogService{
@@ -63,19 +64,7 @@ public class LogService{
   }
 
   public Map<String, Long> getSummary() {
-    Map<String, Long> resume = new HashMap<>();
-
-    for (LogEntry log : logs) {
-      String nivel = log.logLevel();
-
-      if (resume.containsKey(nivel)) {
-        Long currentQuantity = resume.get(nivel);
-        resume.put(nivel, currentQuantity + 1L);
-      } else {
-        resume.put(nivel, 1L);
-      }
-    }
-
-    return resume;
+    return logs.stream()
+            .collect(Collectors.groupingBy(LogEntry::logLevel, Collectors.counting()));
   }
 }
