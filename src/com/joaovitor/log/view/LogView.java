@@ -63,6 +63,21 @@ public class LogView {
             }
             break;
 
+          case 4:
+            System.out.print("Qual a palavra-chave: ");
+            String keyWord = sc.nextLine();
+            List<LogEntry> results = service.searchByKeyword(keyWord);
+
+            if (results.isEmpty()) {
+              System.out.println("-> Nenhum log encontrado para a mensagem: " + keyWord);
+            }
+            else {
+              for (LogEntry log : results) {
+                System.out.println(log);
+              }
+            }
+
+            break;
           default:
             System.out.println("OPÇÃO INVÁLIDA. SELECIONE UM NÚMERO DE 0-5");
         }
