@@ -1,18 +1,16 @@
-import com.joaovitor.log.RegexLogParser;
+import com.joaovitor.log.utils.RegexLogParser;
 import com.joaovitor.log.service.LogService;
 import com.joaovitor.log.utils.LogParser;
+import com.joaovitor.log.view.LogView;
 
 public class Main {
   public static void main(String[] args) {
 
     LogParser lParser = new RegexLogParser();
-    LogService lService = new LogService(lParser);
+    LogService service = new LogService(lParser);
 
-    lService.processFile("logs/app.log");
+    LogView view = new LogView(service);
 
-    //System.out.println(lService.searchByLevel("INFO"));
-
-    System.out.println(lService.searchByKeyword("servidor"));
-    System.out.println(lService.searchByKeyword("cpu"));
+    view.start();
   }
 }
