@@ -36,58 +36,11 @@ public class LogView {
         }
 
         switch (convertedOptionInInt) {
-          case 1:
-            System.out.print("Digite o caminho do arquivo: ");
-            String path = sc.nextLine();
-            service.processFile(path);
-            System.out.println("-> Arquivo processado com sucesso! Foram carregados " + service.getLogs().size() + " logs válidos.");
-            break;
-
-          case 2:
-            System.out.println("Resumo Geral");
-            System.out.println(service.getSummary());
-            break;
-
-          case 3:
-            System.out.print("Escolha um nível: ");
-            String level = sc.nextLine();
-            List<LogEntry> logs = service.searchByLevel(level);
-
-            if (logs.isEmpty()) {
-              System.out.println("-> Nenhum log encontrado para o nível: " + level);
-            }
-            else {
-              for (LogEntry log : logs) {
-                System.out.println(log);
-              }
-            }
-            break;
-
-          case 4:
-            System.out.print("Qual a palavra-chave: ");
-            String keyWord = sc.nextLine();
-            List<LogEntry> results = service.searchByKeyword(keyWord);
-
-            if (results.isEmpty()) {
-              System.out.println("-> Nenhum log encontrado para a mensagem: " + keyWord);
-            }
-            else {
-              for (LogEntry log : results) {
-                System.out.println(log);
-              }
-            }
-            break;
-
-          case 5:
-            try {
-              String summaryPath = "logs/report.txt";
-              service.exportReport(summaryPath);
-              System.out.println("-> SUCESSO! Relatório gerado em: " + summaryPath);
-            } catch (RuntimeException e) {
-              System.out.println(e.getMessage());
-            }
-            break;
-
+          case 1: processFileOption(); break;
+          case 2: showSummaryOption(); break;
+          case 3: filterByLevelOption(); break;
+          case 4: searchByKeywordOption(); break;
+          case 5: exportReportOption(); break;
           default:
             System.out.println("OPÇÃO INVÁLIDA. SELECIONE UM NÚMERO DE 0-5");
         }
@@ -109,6 +62,58 @@ public class LogView {
     System.out.println("5. Exportar Relatório Final (report.txt)");
     System.out.println("0. Sair");
     System.out.println("----------------------");
+  }
+
+  public void processFileOption() {
+    System.out.print("Digite o caminho do arquivo: ");
+    String path = sc.nextLine();
+    service.processFile(path);
+    System.out.println("-> Arquivo processado com sucesso! Foram carregados " + service.getLogs().size() + " logs válidos.");
+  }
+
+  public void showSummaryOption() {
+    System.out.println("Resumo Geral");
+    System.out.println(service.getSummary());
+  }
+
+  public void filterByLevelOption() {
+    System.out.print("Escolha um nível: ");
+    String level = sc.nextLine();
+    List<LogEntry> logs = service.searchByLevel(level);
+
+    if (logs.isEmpty()) {
+      System.out.println("-> Nenhum log encontrado para o nível: " + level);
+    }
+    else {
+      for (LogEntry log : logs) {
+        System.out.println(log);
+      }
+    }
+  }
+
+  public void searchByKeywordOption() {
+    System.out.print("Qual a palavra-chave: ");
+    String keyWord = sc.nextLine();
+    List<LogEntry> results = service.searchByKeyword(keyWord);
+
+    if (results.isEmpty()) {
+      System.out.println("-> Nenhum log encontrado para a mensagem: " + keyWord);
+    }
+    else {
+      for (LogEntry log : results) {
+        System.out.println(log);
+      }
+    }
+  }
+
+  public void exportReportOption() {
+    try {
+      String summaryPath = "logs/report.txt";
+      service.exportReport(summaryPath);
+      System.out.println("-> SUCESSO! Relatório gerado em: " + summaryPath);
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+    }
   }
 }
 
