@@ -67,4 +67,38 @@ public class LogService{
     return logs.stream()
             .collect(Collectors.groupingBy(LogEntry::logLevel, Collectors.counting()));
   }
+
+  public void exportReport(String destinationPath) {
+    //1. Cria o quadro branco
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("------------ RELATÓRIO DE LOGS -------------- \n");
+    sb.append("Total de logs: ").append(logs.size()).append("\n\n");
+
+    sb.append("Resumo por Nível:\n");
+
+    //2. Pega o Dicionário de Resumo (ex: {"INFO": 50, "ERROR": 12})
+    Map<String, Long> summary = getSummary();
+
+    // 3. Transforma em lista e faz um loop no Dicionário para escrever cada nível no quadro
+    for(Map.Entry<String, Long> row : summary.entrySet()) {
+      sb.append(row.getKey()).append(": ").append(row.getValue()).append("\n");
+    }
+
+    // 4. tira a "foto" do quadro e converte em String
+    String finalContent = sb.toString();
+
+    // 5. prepara o endereço do HD
+    Path path = Path.of(destinationPath);
+
+    try {
+      if (path.getParent() != null) {
+        Files.createDirectories(path.getParent());
+      }
+
+      Files.writeString(path, finalContent);
+    } catch (IOException e) {
+      throw new RuntimeException("Erro ao salvar o relatório: " + e.getMessage());
+    }
+  }
 }

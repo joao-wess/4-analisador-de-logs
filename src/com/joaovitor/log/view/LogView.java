@@ -76,8 +76,18 @@ public class LogView {
                 System.out.println(log);
               }
             }
-
             break;
+
+          case 5:
+            try {
+              String summaryPath = "logs/report.txt";
+              service.exportReport(summaryPath);
+              System.out.println("-> SUCESSO! Relatório gerado em: " + summaryPath);
+            } catch (RuntimeException e) {
+              System.out.println(e.getMessage());
+            }
+            break;
+
           default:
             System.out.println("OPÇÃO INVÁLIDA. SELECIONE UM NÚMERO DE 0-5");
         }
