@@ -1,0 +1,7 @@
+------------ RELATÓRIO DE LOGS -------------- 
+Total de logs: 5
+
+Resumo por Nível:
+ERROR: 1
+INFO: 2
+WARNING: 2

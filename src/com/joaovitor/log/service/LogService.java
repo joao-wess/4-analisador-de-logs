@@ -81,9 +81,9 @@ public class LogService{
     Map<String, Long> summary = getSummary();
 
     // 3. Transforma em lista e faz um loop no Dicionário para escrever cada nível no quadro
-    for(Map.Entry<String, Long> row : summary.entrySet()) {
-      sb.append(row.getKey()).append(": ").append(row.getValue()).append("\n");
-    }
+    summary.forEach((key, value) -> {
+      sb.append(key).append(": ").append(value).append("\n");
+    });
 
     // 4. tira a "foto" do quadro e converte em String
     String finalContent = sb.toString();
