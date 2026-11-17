@@ -60,7 +60,7 @@ public class LogService{
 
   //return logs
   public List<LogEntry> getLogs() {
-    return logs;
+    return new ArrayList<>(logs);
   }
 
   public Map<String, Long> getSummary() {
